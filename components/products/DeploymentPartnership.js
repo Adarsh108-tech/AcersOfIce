@@ -180,7 +180,7 @@ export default function DeploymentPartnershipCTA() {
           </h3>
           <p className="text-gray-600 mb-10">
             Whether you are planning a pilot, scaling a regional program, or
-            conducting applied research, we’d love to collaborate.
+            conducting applied research, we&#39;d love to collaborate.
           </p>
 
           <div className="flex flex-wrap justify-center gap-4">

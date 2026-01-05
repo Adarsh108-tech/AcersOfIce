@@ -53,7 +53,7 @@ export default function AboutGlaciers() {
 
             <div className="mt-6 space-y-4 text-gray-700 leading-relaxed">
               <p>
-                The Hindu Kush-Himalayan region acts as Asia’s water reserve,
+                The Hindu Kush-Himalayan region acts as Asia&#39;s water reserve,
                 supporting over a billion people downstream.
               </p>
 

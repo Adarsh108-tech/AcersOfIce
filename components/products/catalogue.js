@@ -42,7 +42,7 @@ export default function ProductCatalogue() {
             Our Core Solutions
           </h2>
           <p className="text-lg text-gray-600">
-            Explore Acres of Ice’s modular, scalable products designed for
+            Explore Acres of Ice&#39;s modular, scalable products designed for
             high-altitude, water-scarce, and climate-stressed environments.
           </p>
         </motion.div>
