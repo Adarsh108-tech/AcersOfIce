@@ -38,11 +38,8 @@ const cards = [
 ];
 
 export default function HeroSection() {
-  const CARD_WIDTH = 260;
-  const SPREAD = 60; // horizontal spacing between cards
-
   return (
-    <section className="w-full h-screen overflow-hidden relative">
+    <section className="relative w-full min-h-screen overflow-hidden">
       {/* Background Video */}
       <video
         autoPlay
@@ -55,91 +52,122 @@ export default function HeroSection() {
       </video>
 
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black/50" />
+      <div className="absolute inset-0 bg-black/60" />
 
-      {/* Centered Content */}
-      <div className="relative z-10 h-full flex items-center justify-center px-16">
-        <div className="flex items-center justify-between w-full max-w-7xl gap-16">
-          
+      {/* Content */}
+      <div className="relative z-10 min-h-screen flex items-center px-5 sm:px-8 md:px-16">
+        <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+
           {/* LEFT CONTENT */}
-          <div className="max-w-xl text-white">
-            <h1 className="text-5xl font-bold leading-tight text-center md:text-left">
+          <div className="text-white text-center lg:text-left">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold leading-tight">
               ENABLING water
               <br />
               <span className="text-blue-400">CONSERVATION</span>
             </h1>
 
-            <p className="mt-6 text-lg text-gray-200 text-center md:text-left">
-              Harnessing water, tech, and community to transform meltwater into resilience
+            <p className="mt-6 text-sm sm:text-base md:text-lg text-gray-200 max-w-xl mx-auto lg:mx-0">
+              Harnessing water, technology, and communities to transform
+              meltwater into long-term resilience.
             </p>
 
-            <div className="mt-8 text-center md:text-left">
+            <div className="mt-8">
               <Link
                 href="/projects"
-                className="inline-block px-6 py-3 bg-blue-500 hover:bg-blue-600 transition rounded-md font-medium"
+                className="inline-block px-7 py-3 bg-blue-500 hover:bg-blue-600 transition rounded-md font-medium"
               >
                 Explore Projects
               </Link>
             </div>
           </div>
 
-          {/* RIGHT CARD STACK */}
-          <div className="relative w-[320px] h-[380px] flex-shrink-0">
-            {cards.map((card, index) => {
-              const xOffset = -index * SPREAD;
-              const rotate = -index * 3;
+          {/* RIGHT CARDS */}
+          <div className="relative w-full">
 
-              return (
-                <motion.div
+            {/* 🔹 MOBILE & TABLET VIEW */}
+            <div className="flex gap-5 overflow-x-auto pb-4 lg:hidden">
+              {cards.map((card, index) => (
+                <Link
                   key={index}
-                  initial={{ x: xOffset, rotate }}
-                  whileHover={{
-                    y: -24,
-                    rotate: 0,
-                    scale: 1.06,
-                    zIndex: 100,
-                  }}
-                  transition={{
-                    type: "spring",
-                    stiffness: 240,
-                    damping: 20,
-                  }}
-                  className="absolute top-0 cursor-pointer"
-                  style={{
-                    right: 0,
-                    width: CARD_WIDTH,
-                    zIndex: cards.length - index,
-                  }}
+                  href={card.href}
+                  className="min-w-[240px] bg-white rounded-xl shadow-xl overflow-hidden"
                 >
-                  <Link href={card.href}>
-                    <div className="bg-white rounded-xl shadow-xl overflow-hidden">
-                      {/* IMAGE */}
-                      <div className="relative w-full h-[160px] overflow-hidden">
-                        <Image
-                          src={card.image}
-                          alt={card.title}
-                          fill
-                          className="object-cover"
-                          priority={index === 0}
-                        />
-                      </div>
+                  <div className="relative w-full h-[150px]">
+                    <Image
+                      src={card.image}
+                      alt={card.title}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
 
-                      {/* CONTENT */}
-                      <div className="p-4">
-                        <h3 className="text-base font-semibold text-gray-800">
-                          {card.title}
-                        </h3>
-                        <p className="text-sm text-gray-600 mt-1">
-                          {card.description}
-                        </p>
+                  <div className="p-4">
+                    <h3 className="font-semibold text-gray-800">
+                      {card.title}
+                    </h3>
+                    <p className="text-sm text-gray-600 mt-1">
+                      {card.description}
+                    </p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+
+            {/* 🔹 DESKTOP OVERLAPPING STACK */}
+            <div className="hidden lg:flex relative h-[380px] justify-end">
+              {cards.map((card, index) => {
+                const xOffset = -index * 45;
+                const rotate = -index * 3;
+
+                return (
+                  <motion.div
+                    key={index}
+                    initial={{ x: xOffset, rotate }}
+                    whileHover={{
+                      y: -22,
+                      rotate: 0,
+                      scale: 1.06,
+                      zIndex: 50,
+                    }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 260,
+                      damping: 22,
+                    }}
+                    className="absolute top-0 cursor-pointer"
+                    style={{
+                      width: 260,
+                      zIndex: cards.length - index,
+                    }}
+                  >
+                    <Link href={card.href}>
+                      <div className="bg-white rounded-xl shadow-2xl overflow-hidden">
+                        <div className="relative w-full h-[160px]">
+                          <Image
+                            src={card.image}
+                            alt={card.title}
+                            fill
+                            className="object-cover"
+                            priority={index === 0}
+                          />
+                        </div>
+
+                        <div className="p-4">
+                          <h3 className="text-base font-semibold text-gray-800">
+                            {card.title}
+                          </h3>
+                          <p className="text-sm text-gray-600 mt-1">
+                            {card.description}
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                  </Link>
-                </motion.div>
-              );
-            })}
+                    </Link>
+                  </motion.div>
+                );
+              })}
+            </div>
+
           </div>
-
         </div>
       </div>
     </section>
